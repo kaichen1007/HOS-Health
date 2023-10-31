@@ -1,0 +1,41 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/chenkai/.ohos/config/auto_debug_TrainHealth_cn.kai.myapplication_540086000300702764.cer",
+          "storePassword": "0000001A1C8DD60E3E99B840E79689930DE03F3C944BA4A714E9E2B1987AB56B6AE3E349FAF3D9F825C0",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A869F013F85A004D517A6D2046D0656CFC2B1BFDA500D180FD1F3AE4CB7DF8F31C74DC7667097",
+          "profile": "/Users/chenkai/.ohos/config/auto_debug_TrainHealth_cn.kai.myapplication_540086000300702764.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/chenkai/.ohos/config/auto_debug_TrainHealth_cn.kai.myapplication_540086000300702764.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 9,
+    "compatibleSdkVersion": 9,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
