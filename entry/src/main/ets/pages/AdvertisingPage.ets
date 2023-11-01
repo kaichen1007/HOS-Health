@@ -12,7 +12,7 @@ import { SplashPage } from './SplashPage';
 @Component
 struct AdvertisingPage {
   //延迟五秒
-  @State duration: number = 5;
+  @State duration: number = 2;
   //定时器 id
   private intervalId: number = -1;
 
