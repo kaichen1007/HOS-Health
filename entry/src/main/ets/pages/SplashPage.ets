@@ -6,6 +6,8 @@ import router from '@ohos.router';
 import Logger from '../common/Logger';
 import { CommonConstants } from '../common/constant/CommonConstants';
 import UserPrivacyDialog from '../view/dialog/UserPrivacyDialog';
+import thermal from '@ohos.thermal';
+import ColorConstants from '../common/constant/ColorConstants';
 
 //Preferences实例的名称。
 const H_STORE: string = 'healthAppStore';
@@ -24,6 +26,7 @@ export struct SplashPage{
   dialogController: CustomDialogController = new CustomDialogController({
     builder: UserPrivacyDialog(
       {
+        //传递 关闭与提交方法
         cancel: ()=>{ this.exitApp()},
         confirm: ()=>{this.onConfirm()}
       }
@@ -52,11 +55,12 @@ export struct SplashPage{
     preferences.then((res)=>{
       //获取数据  默认为false
       res.get(IS_PRIVACY,false).then((isPrivate)=>{
+        Logger.info('获取用户首选项','隐私相关'+isPrivate)
         if (isPrivate == true) {
           //已授权 直接跳转
           this.jumpAdvertisingPage()
         }else {
-          //为获取 打开弹窗
+          //未获取 打开弹窗
           this.dialogController.open()
         }
       })
@@ -100,7 +104,39 @@ export struct SplashPage{
 
   build(){
     Column(){
-
+      Button("清除首选项")
+        .onClick(()=>{
+          let preferences = data_preferences.getPreferences(this.context,H_STORE);
+          //回调
+          preferences.then((res)=>{
+            res.delete(IS_PRIVACY)
+            res.flush()
+          })
+        })
+      Button("开启弹窗")
+        .onClick(()=>{
+          this.dialogController.open();
+        })
+      Column(){
+        Image($r('app.media.logo'))
+          .width(120)
+          .margin({top:120})
+        Text("健康生活")
+          .fontFamily("HarmonyHeiTi-Bold")
+          .fontSize(22)
+          .fontWeight(600)
+          .fontColor(ColorConstants.titleColor)
+          .margin({top:20,bottom:8})
+          //字符间距
+          .letterSpacing(0.1)
+        Text("运动总有新玩法")
+          .fontSize(16)
+          .fontFamily("HarmonyHeiTi")
+          .fontColor(ColorConstants.titleColor)
+          .letterSpacing(3.4)
+          .fontWeight(CommonConstants.FONT_WEIGHT_400)
+          .opacity(0.6)
+      }
     }
     .width(CommonConstants.FULL_WIDTH)
     .height(CommonConstants.FULL_HEIGHT)

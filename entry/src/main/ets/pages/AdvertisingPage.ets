@@ -9,7 +9,6 @@ import { SplashPage } from './SplashPage';
 @Entry
 @Component
 struct AdvertisingPage {
-  context: common.UIAbilityContext = getContext(SplashPage) as common.UIAbilityContext;
   @State message: string = '广告页'
 
   build() {
@@ -18,16 +17,11 @@ struct AdvertisingPage {
         Text(this.message)
           .fontSize(50)
           .fontWeight(FontWeight.Bold)
-        Button("清除")
+        Button("退回")
           .onClick(()=>{
-            let preferences = data_preferences.getPreferences(this.context,"healthAppStore");
-            preferences.then((res)=>{
-              res.delete("isPrivacy").then(()=>{
-                setTimeout(()=>{
-                  router.replaceUrl({url:"pages/SplashPage"})
-                },1000)
-              })
-            })
+            setTimeout(()=>{
+              router.replaceUrl({url:"pages/SplashPage"})
+            },1000)
           })
       }
       .width('100%')
