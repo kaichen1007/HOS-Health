@@ -98,25 +98,12 @@ export struct SplashPage{
   jumpAdvertisingPage(){
     setTimeout(()=>{
       router.replaceUrl({url:'pages/AdvertisingPage'})
-    },CommonConstants.LAUNCHER_DELAY_TIME)//延迟两秒
+    },CommonConstants.DURATION_1000)//延迟两秒
 
   }
 
   build(){
     Column(){
-      Button("清除首选项")
-        .onClick(()=>{
-          let preferences = data_preferences.getPreferences(this.context,H_STORE);
-          //回调
-          preferences.then((res)=>{
-            res.delete(IS_PRIVACY)
-            res.flush()
-          })
-        })
-      Button("开启弹窗")
-        .onClick(()=>{
-          this.dialogController.open();
-        })
       Column(){
         Image($r('app.media.logo'))
           .width(120)
